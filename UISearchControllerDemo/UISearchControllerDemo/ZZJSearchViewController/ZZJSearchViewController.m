@@ -10,7 +10,7 @@
 #import "ZZJSearchTableViewCell.h"
 #import "ZZJTempViewController.h"
 
-@interface ZZJSearchViewController ()<UISearchResultsUpdating,UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface ZZJSearchViewController ()<UISearchResultsUpdating,UISearchBarDelegate,UISearchControllerDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @end
 
@@ -27,7 +27,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.searchController.searchBar becomeFirstResponder];
+    self.searchController.active = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -52,6 +52,7 @@
     _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     _searchController.searchResultsUpdater = self;
     _searchController.searchBar.delegate = self;
+    _searchController.delegate = self;
     _searchController.searchBar.placeholder = @"请输入要查找的内容";
     _searchController.dimsBackgroundDuringPresentation = NO;
     [_searchController.searchBar sizeToFit];
@@ -67,8 +68,8 @@
 }
 
 - (void)configDataArray {
-    NSArray *array = @[@"A",@"B",@"C",@"D"];
-    self.dataArray = [NSMutableArray arrayWithArray:array];
+    //NSArray *array = @[@"A",@"B",@"C",@"D"];
+    self.dataArray = [NSMutableArray array];
     [self.tableView reloadData];
 }
 
@@ -88,7 +89,12 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"点击cancel按钮");
     [self configHistoryArray];
-    [self configDataArray];
+    //[self configDataArray];
+}
+
+#pragma mark - UISearchControllerDelegate
+- (void)didPresentSearchController:(UISearchController *)searchController {
+    [self.searchController.searchBar becomeFirstResponder];
 }
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource
@@ -98,11 +104,26 @@
     return 1;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (!self.searchController.active) {
-        return @"历史搜索";
+        return SW(200);
     }
     return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, SW(200))];
+    header.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *title = [[UILabel alloc] initWithFrame:header.frame];
+    title.text = @"历史搜索";
+    title.textColor = [UIColor blackColor];
+    title.font = [UIFont boldSystemFontOfSize:SW(80)];
+    title.textAlignment = NSTextAlignmentLeft;
+    [header addSubview:title];
+    
+    return header;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -114,15 +135,15 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     
-    UIView *foot = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, SW(300))];
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, SW(300))];
     
-    UIButton *clearHisroty = [[UIButton alloc] initWithFrame:foot.frame];
+    UIButton *clearHisroty = [[UIButton alloc] initWithFrame:footer.frame];
     [clearHisroty setTitle:@"清除历史记录" forState:UIControlStateNormal];
     [clearHisroty setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [clearHisroty addTarget:self action:@selector(clearHistory:) forControlEvents:UIControlEventTouchUpInside];
-    [foot addSubview:clearHisroty];
+    [footer addSubview:clearHisroty];
     
-    return foot;
+    return footer;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -131,7 +152,7 @@
         return self.historyArray.count;
     }else{
         if (self.dataArray.count <= 0) {
-            return 1;
+            return 0;
         }else{
             return self.dataArray.count;
         }
@@ -148,7 +169,7 @@
         [cell configCellWith:[self.historyArray objectAtIndex:indexPath.row]];
     }else{
         if (self.dataArray.count <= 0) {
-           // [cell configCellWith:@"没有查找的内容"];
+            //[cell configCellWith:@"没有查找的内容"];
         }else{
             [cell configCellWith:[self.dataArray objectAtIndex:indexPath.row]];
         }
@@ -169,6 +190,12 @@
     }else{
         vc.title = self.dataArray[indexPath.row];
     }
+    
+    int r = (arc4random()%256);
+    int g = (arc4random()%256);
+    int b = (arc4random()%256);
+    vc.view.backgroundColor = RGB(r, g, b);
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -224,6 +251,7 @@
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     [userDefault setObject:searchTextArray forKey:@"myHistoryArray"];
     
+    [self configHistoryArray];
     [self.tableView reloadData];
     
     NSLog(@"清除历史记录");
