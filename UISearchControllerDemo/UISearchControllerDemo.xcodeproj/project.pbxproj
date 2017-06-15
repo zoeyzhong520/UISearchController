@@ -15,6 +15,9 @@
 		D8FBF1AC1EF227D30095E854 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8FBF1AA1EF227D30095E854 /* LaunchScreen.storyboard */; };
 		D8FBF1B71EF227D30095E854 /* UISearchControllerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FBF1B61EF227D30095E854 /* UISearchControllerDemoTests.m */; };
 		D8FBF1C21EF227D30095E854 /* UISearchControllerDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FBF1C11EF227D30095E854 /* UISearchControllerDemoUITests.m */; };
+		D8FBF1D61EF229EC0095E854 /* ZZJSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FBF1D51EF229EC0095E854 /* ZZJSearchViewController.m */; };
+		D8FBF1D91EF22E1C0095E854 /* ZZJSearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FBF1D81EF22E1C0095E854 /* ZZJSearchTableViewCell.m */; };
+		D8FBF1DC1EF293630095E854 /* ZZJTempViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FBF1DB1EF293630095E854 /* ZZJTempViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,12 @@
 		D8FBF1BD1EF227D30095E854 /* UISearchControllerDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UISearchControllerDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8FBF1C11EF227D30095E854 /* UISearchControllerDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UISearchControllerDemoUITests.m; sourceTree = "<group>"; };
 		D8FBF1C31EF227D30095E854 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8FBF1D41EF229EC0095E854 /* ZZJSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZJSearchViewController.h; sourceTree = "<group>"; };
+		D8FBF1D51EF229EC0095E854 /* ZZJSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZJSearchViewController.m; sourceTree = "<group>"; };
+		D8FBF1D71EF22E1C0095E854 /* ZZJSearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZJSearchTableViewCell.h; sourceTree = "<group>"; };
+		D8FBF1D81EF22E1C0095E854 /* ZZJSearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZJSearchTableViewCell.m; sourceTree = "<group>"; };
+		D8FBF1DA1EF293630095E854 /* ZZJTempViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZJTempViewController.h; sourceTree = "<group>"; };
+		D8FBF1DB1EF293630095E854 /* ZZJTempViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZJTempViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +110,7 @@
 		D8FBF19B1EF227D20095E854 /* UISearchControllerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				D8FBF1D31EF229CB0095E854 /* ZZJSearchViewController */,
 				D8FBF19F1EF227D20095E854 /* AppDelegate.h */,
 				D8FBF1A01EF227D30095E854 /* AppDelegate.m */,
 				D8FBF1A21EF227D30095E854 /* ViewController.h */,
@@ -138,6 +148,19 @@
 				D8FBF1C31EF227D30095E854 /* Info.plist */,
 			);
 			path = UISearchControllerDemoUITests;
+			sourceTree = "<group>";
+		};
+		D8FBF1D31EF229CB0095E854 /* ZZJSearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D8FBF1D41EF229EC0095E854 /* ZZJSearchViewController.h */,
+				D8FBF1D51EF229EC0095E854 /* ZZJSearchViewController.m */,
+				D8FBF1D71EF22E1C0095E854 /* ZZJSearchTableViewCell.h */,
+				D8FBF1D81EF22E1C0095E854 /* ZZJSearchTableViewCell.m */,
+				D8FBF1DA1EF293630095E854 /* ZZJTempViewController.h */,
+				D8FBF1DB1EF293630095E854 /* ZZJTempViewController.m */,
+			);
+			path = ZZJSearchViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,6 +299,9 @@
 				D8FBF1A41EF227D30095E854 /* ViewController.m in Sources */,
 				D8FBF1A11EF227D30095E854 /* AppDelegate.m in Sources */,
 				D8FBF19E1EF227D20095E854 /* main.m in Sources */,
+				D8FBF1D91EF22E1C0095E854 /* ZZJSearchTableViewCell.m in Sources */,
+				D8FBF1D61EF229EC0095E854 /* ZZJSearchViewController.m in Sources */,
+				D8FBF1DC1EF293630095E854 /* ZZJTempViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
