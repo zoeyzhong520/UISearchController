@@ -62,7 +62,8 @@
 
 - (void)configHistoryArray {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    self.historyArray = [NSArray arrayWithArray:[userDefaults objectForKey:@"myHistoryArray"]];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[userDefaults objectForKey:@"myHistoryArray"]];
+    self.historyArray = [[array reverseObjectEnumerator] allObjects];
     
     NSLog(@"historyArray=%@",self.historyArray);
 }
@@ -90,6 +91,7 @@
     NSLog(@"点击cancel按钮");
     [self configHistoryArray];
     //[self configDataArray];
+   // [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UISearchControllerDelegate
@@ -136,6 +138,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     
     UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, SW(300))];
+    footer.backgroundColor = [UIColor lightTextColor];
     
     UIButton *clearHisroty = [[UIButton alloc] initWithFrame:footer.frame];
     [clearHisroty setTitle:@"清除历史记录" forState:UIControlStateNormal];
@@ -232,7 +235,7 @@
         [searchTextArray addObject:searchText];
     }
     
-    if (searchTextArray.count > 5) {
+    if (searchTextArray.count > 6) {
         [searchTextArray removeObjectAtIndex:0];
     }
     
